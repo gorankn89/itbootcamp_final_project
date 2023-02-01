@@ -1,11 +1,13 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import pages.LoginPage;
 
 import java.time.Duration;
 
@@ -13,14 +15,17 @@ public abstract class BaseTest {
     protected WebDriver driver;
     protected WebDriverWait driverWait;
     // Pages in Parrent Class
-
+    protected LoginPage loginPage;
 
 
     //Variables for Test Available for all Tests
-    protected String passwordReal = "secret_sauce";
-    protected String passwordFake = "Secret_Sauce";
-    protected String standardUser = "standard_user";
-    protected String lockedOutUser = "locked_out_user";
+    protected Faker faker;
+    protected String realPassword = "12345";
+    protected String passwordFake = "123456";
+    protected String realUser = "admin@admin.com";
+    protected String lockedOutUser = "adminn@admin.com";
+    protected String fakerEmail;
+    protected String fakerPassword;
 
     // Before Class / Method - After Class Methods available to all Tests
 
@@ -30,11 +35,18 @@ public abstract class BaseTest {
         this.driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         this.driverWait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        driver.manage().window().maximize();
+        this.loginPage = new LoginPage(driver, driverWait);
+        faker = new Faker();
+        fakerEmail = faker.internet().emailAddress();
+        fakerPassword = faker.internet().password();
     }
 
     @BeforeMethod
     public void beforeMethod(){
         driver.get("https://vue-demo.daniel-avellaneda.com");
+        loginPage.logOutIfNecesary();
+
     }
 
     @AfterClass
