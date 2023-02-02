@@ -8,6 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import pages.LoginPage;
+import pages.SingupPage;
 
 import java.time.Duration;
 
@@ -16,6 +17,7 @@ public abstract class BaseTest {
     protected WebDriverWait driverWait;
     // Pages in Parrent Class
     protected LoginPage loginPage;
+    protected SingupPage singupPage;
 
 
     //Variables for Test Available for all Tests
@@ -37,6 +39,7 @@ public abstract class BaseTest {
         this.driverWait = new WebDriverWait(driver, Duration.ofSeconds(20));
         driver.manage().window().maximize();
         this.loginPage = new LoginPage(driver, driverWait);
+        this.singupPage = new SingupPage(driver,driverWait);
         faker = new Faker();
         fakerEmail = faker.internet().emailAddress();
         fakerPassword = faker.internet().password();

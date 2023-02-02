@@ -27,7 +27,7 @@ public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
-
+    // Methods of Login Page
     public void logMeIn(String email, String password) {
     inputEmail.clear();
     inputPassword.clear();
