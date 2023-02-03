@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import pages.AdminCitiesPage;
 import pages.LoginPage;
 import pages.SingupPage;
 
@@ -19,6 +20,8 @@ public abstract class BaseTest {
     protected LoginPage loginPage;
     protected SingupPage singupPage;
 
+    protected AdminCitiesPage adminCitiesPage;
+
 
     //Variables for Test Available for all Tests
     protected Faker faker;
@@ -28,6 +31,7 @@ public abstract class BaseTest {
     protected String lockedOutUser = "adminn@admin.com";
     protected String fakerEmail;
     protected String fakerPassword;
+
 
     // Before Class / Method - After Class Methods available to all Tests
 
@@ -40,6 +44,7 @@ public abstract class BaseTest {
         driver.manage().window().maximize();
         this.loginPage = new LoginPage(driver, driverWait);
         this.singupPage = new SingupPage(driver,driverWait);
+        this.adminCitiesPage = new AdminCitiesPage(driver, driverWait);
         faker = new Faker();
         fakerEmail = faker.internet().emailAddress();
         fakerPassword = faker.internet().password();

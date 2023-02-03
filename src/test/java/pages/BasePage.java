@@ -23,4 +23,5 @@ public abstract class BasePage {
         }
         return driver.getCurrentUrl().contains(what);
     }
+
 }
