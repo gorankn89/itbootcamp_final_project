@@ -31,6 +31,8 @@ public abstract class BaseTest {
     protected String lockedOutUser = "adminn@admin.com";
     protected String fakerEmail;
     protected String fakerPassword;
+    protected String fakerName;
+
 
 
     // Before Class / Method - After Class Methods available to all Tests
@@ -48,6 +50,7 @@ public abstract class BaseTest {
         faker = new Faker();
         fakerEmail = faker.internet().emailAddress();
         fakerPassword = faker.internet().password();
+        fakerName = faker.name().fullName();
     }
 
     @BeforeMethod

@@ -58,4 +58,8 @@ public class SingupPage extends BasePage{
         System.out.println(singupPopupMessage.getText());
         return singupPopupMessage.getText();
     }
+
+    public WebElement getSignupButton() {
+        return signupButton;
+    }
 }
