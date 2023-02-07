@@ -8,40 +8,44 @@ import pages.ProfilePage;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class ProfileTest extends BaseTest{
+public class ProfileTest extends BaseTest {
     private ProfilePage profilePage;
     private String fakerPhoneNumber;
     private String city;
     private String fakerCountry;
+
     @BeforeClass
     @Override
     public void beforeClass() {
         super.beforeClass();
-        profilePage = new ProfilePage(driver,driverWait);
+        profilePage = new ProfilePage(driver, driverWait);
         fakerPhoneNumber = faker.phoneNumber().cellPhone();
         city = "San Francisco";
         fakerCountry = faker.country().name();
     }
 
-    public void loginNewUser(){
+    public void loginNewUser() {
         driver.get("https://vue-demo.daniel-avellaneda.com/login");
         loginPage.logMeIn(fakerEmail, fakerPassword);
         profilePage.clickCloseButtonAfterLogin();
     }
-    public void createNewUser(){
+
+    public void createNewUser() {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
         singupPage.setDataInInputFields(fakerName, fakerEmail, fakerPassword, fakerPassword);
         System.out.println(fakerEmail);
         System.out.println(fakerPassword);
 
     }
-    public void createAndLogin(){
+
+    public void createAndLogin() {
         createNewUser();
         loginNewUser();
 
     }
+
     @Test
-    public void verifyWriteProfile(){
+    public void verifyWriteProfile() {
         createAndLogin();
         profilePage.goToProfilePage();
         profilePage.fillTheDataInInputFields(fakerName, fakerPhoneNumber, city, fakerCountry);

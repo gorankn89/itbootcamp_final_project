@@ -21,19 +21,20 @@ public class LoginPage extends BasePage {
     private WebElement inputPassword;
     @FindBy(className = "btnLogout")
     private List<WebElement> logOutButtonList;
-    @FindBy ( xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li")
+    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li")
     private WebElement errorMesageForUsser;
 
     public LoginPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
+
     // Methods of Login Page
     public void logMeIn(String email, String password) {
-    inputEmail.clear();
-    inputPassword.clear();
-    inputEmail.sendKeys(email);
-    inputPassword.sendKeys(password);
-    loginButton.submit();
+        inputEmail.clear();
+        inputPassword.clear();
+        inputEmail.sendKeys(email);
+        inputPassword.sendKeys(password);
+        loginButton.submit();
     }
 
     public boolean isOnLoginPage() {
@@ -61,17 +62,17 @@ public class LoginPage extends BasePage {
             System.out.println(logOutButtonList.size());
             logOutButtonList.get(0).click();
         }
-        System.out.println("Not Loged In");
+        System.out.println("Not Logged In");
 
     }
 
     public boolean checkErrorWhenUserDoesNotExists(String message) {
 
-    return errorMesageForUsser.getText().equals(message);
+        return errorMesageForUsser.getText().equals(message);
     }
 
     public boolean checkErrorWhenPasswordIncorrect() {
-    return checkErrorWhenUserDoesNotExists("Wrong password");
+        return checkErrorWhenUserDoesNotExists("Wrong password");
     }
 
     public boolean checkIsUrlContainsHome() {

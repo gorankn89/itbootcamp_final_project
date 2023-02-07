@@ -34,7 +34,6 @@ public abstract class BaseTest {
     protected String fakerName;
 
 
-
     // Before Class / Method - After Class Methods available to all Tests
 
     @BeforeClass
@@ -45,7 +44,7 @@ public abstract class BaseTest {
         this.driverWait = new WebDriverWait(driver, Duration.ofSeconds(20));
         driver.manage().window().maximize();
         this.loginPage = new LoginPage(driver, driverWait);
-        this.singupPage = new SingupPage(driver,driverWait);
+        this.singupPage = new SingupPage(driver, driverWait);
         this.adminCitiesPage = new AdminCitiesPage(driver, driverWait);
         faker = new Faker();
         fakerEmail = faker.internet().emailAddress();
@@ -54,7 +53,7 @@ public abstract class BaseTest {
     }
 
     @BeforeMethod
-    public void beforeMethod(){
+    public void beforeMethod() {
         driver.get("https://vue-demo.daniel-avellaneda.com");
         loginPage.logOutIfNecesary();
 

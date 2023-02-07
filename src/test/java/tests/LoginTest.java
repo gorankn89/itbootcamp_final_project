@@ -8,10 +8,11 @@ import org.testng.annotations.Test;
 public class LoginTest extends BaseTest {
     //Test #1: Visits the login page
     @BeforeMethod
-    public void beforeMethod(){
+    public void beforeMethod() {
         super.beforeMethod();
         loginPage.goToLoginPage();
     }
+
     @Test
     public void goToLoginPage() {
         boolean respond = loginPage.isOnLoginPage();
@@ -24,29 +25,33 @@ public class LoginTest extends BaseTest {
         boolean loginTypeRespond = loginPage.checkInputTypes();
         Assert.assertTrue(loginTypeRespond);
     }
+
     //Test #3: Displays errors when user does not exist
     @Test
-    public void checkErrorWhenUserDoesNotExists(){
+    public void checkErrorWhenUserDoesNotExists() {
         loginPage.logMeIn(fakerEmail, fakerPassword);
-       Assert.assertTrue(loginPage.checkErrorWhenUserDoesNotExists("User does not exists"));
-       Assert.assertTrue(loginPage.isOnLoginPage());
+        Assert.assertTrue(loginPage.checkErrorWhenUserDoesNotExists("User does not exists"));
+        Assert.assertTrue(loginPage.isOnLoginPage());
     }
+
     //Test #4: Displays errors when password is wrong
     @Test
-    public void checkErrorWhenPasswordIncorrect (){
+    public void checkErrorWhenPasswordIncorrect() {
         loginPage.logMeIn(realUser, fakerPassword);
         Assert.assertTrue(loginPage.checkErrorWhenPasswordIncorrect());
         Assert.assertTrue(loginPage.isOnLoginPage());
     }
+
     //Test #5: Login
     @Test
     public void logMeIn() {
         loginPage.logMeIn(realUser, realPassword);
         Assert.assertTrue(loginPage.checkIsUrlContainsHome());
     }
+
     //Test #6: Logout
     @Test
-    public void logMeOut(){
+    public void logMeOut() {
         loginPage.logMeIn(realUser, realPassword);
         Assert.assertTrue(loginPage.verifyLogOutButton());
         loginPage.logOutIfNecesary();
@@ -58,7 +63,7 @@ public class LoginTest extends BaseTest {
     }
 
     @AfterMethod
-    public void afterMethod () {
+    public void afterMethod() {
     }
 
 

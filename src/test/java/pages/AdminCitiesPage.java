@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -42,7 +41,7 @@ public class AdminCitiesPage extends BasePage {
     @FindBy(xpath = "/html/body/div/div[5]/div/div/div[2]/button[2]")
     private WebElement confirmDeleteBtn;
     @FindBy(xpath = "/html/body/div/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")
-    private WebElement deleteSucessMessage;
+    private WebElement deleteSuccessMessage;
     public AdminCitiesPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
@@ -64,7 +63,7 @@ public class AdminCitiesPage extends BasePage {
         }
         System.out.println();
 
-        return saveStatus.getText().substring(0,saveStatus.getText().indexOf("\n"));
+        return Util.extractFirstLine(saveStatus.getText());
 
     }
 
@@ -93,21 +92,17 @@ public class AdminCitiesPage extends BasePage {
         messageAfterSave.getText();
         System.out.println(messageAfterSave.getAttribute("innerHTML"));
         System.out.println(messageAfterSave.getAttribute("value"));
-        if(messageAfterSave.getText().substring(0, messageAfterSave.getText().indexOf("\n")).equals("Saved successfully")){
-            return true;
-        };
-
-        return false;
+        return Util. extractFirstLine(messageAfterSave.getText()).equals("Saved successfully");
     }
 
     public boolean searchCity(String city) {
         searchFieldInput.sendKeys(city);
         city = city.toLowerCase();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
         driverWait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//table/tbody/tr"), 1));
         System.out.println("Ispis podataka pre dobijanja");
         System.out.println(city);
@@ -140,10 +135,7 @@ public class AdminCitiesPage extends BasePage {
 //        }
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")));
         System.out.println("Delete Message is");
-        System.out.println(deleteSucessMessage.getText().substring(0, deleteSucessMessage.getText().indexOf("\n")));
-        if(deleteSucessMessage.getText().substring(0, deleteSucessMessage.getText().indexOf("\n")).equals("Deleted successfully")){
-            return true;
-        }
-        return false;
+        System.out.println(deleteSuccessMessage.getText().substring(0, deleteSuccessMessage.getText().indexOf("\n")));
+       return Util.extractFirstLine(deleteSuccessMessage.getText()).equals("Deleted successfully");
     }
 }

@@ -12,6 +12,7 @@ public class SingupTest extends BaseTest {
     private String email = "admin@admin.com";
     private String password = "123654";
     private String confirmPassword = "123654";
+
     @BeforeMethod
     public void beforeMethod() {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
@@ -23,18 +24,21 @@ public class SingupTest extends BaseTest {
     public void VerifyUrlSingupPage() {
         Assert.assertTrue(singupPage.urlCompare("/signup", true));
     }
+
     //Test #2: Checks input types
     @Test
     public void checkInputTypes() {
         Assert.assertTrue(singupPage.checkInputTypes());
     }
+
     //Test #3: Displays errors when user already exists
     @Test
-    public void checkIfErrorDisplayedForExistingUsser(){
+    public void checkIfErrorDisplayedForExistingUsser() {
         singupPage.setDataInInputFields(name, email, password, confirmPassword);
         Assert.assertEquals(singupPage.checkErrorUsserExists(), "E-mail already exists");
         Assert.assertTrue(singupPage.urlCompare("/signup", true));
     }
+
     // Test #4: Signup (New Usser)
     @Test
     public void signUpNewUser() {

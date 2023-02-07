@@ -10,15 +10,16 @@ public abstract class BasePage {
     protected WebDriver driver;
     protected WebDriverWait driverWait;
 
-    public BasePage (WebDriver driver, WebDriverWait driverWait){
+    public BasePage(WebDriver driver, WebDriverWait driverWait) {
         this.driver = driver;
         this.driverWait = driverWait;
         PageFactory.initElements(this.driver, this);
 
     }
-    public boolean urlCompare(String what, boolean end){
+
+    public boolean urlCompare(String what, boolean end) {
         driverWait.until(ExpectedConditions.urlContains(what));
-        if (end){
+        if (end) {
             return driver.getCurrentUrl().endsWith(what);
         }
         return driver.getCurrentUrl().contains(what);

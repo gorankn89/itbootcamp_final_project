@@ -7,9 +7,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class LocalePage extends BasePage{
+public class LocalePage extends BasePage {
     //Elements on LocalePage
-    @FindBy (xpath = "/html/body/div/div[1]/div/header/div/div[3]/button/span")
+    @FindBy(xpath = "/html/body/div/div[1]/div/header/div/div[3]/button/span")
     private WebElement localeLanguageBtn;
 
     @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div")
@@ -23,7 +23,6 @@ public class LocalePage extends BasePage{
 
 
     //Methods on LocalePage
-
 
 
     public String setLocale(int elementIndex) {
