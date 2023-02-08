@@ -55,7 +55,6 @@ public class LoginPage extends BasePage {
     }
 
     public void logOutIfNecessary() {
-        System.out.println(logOutButtonList.size());
         if (!logOutButtonList.isEmpty()) {
             logOutButtonList.get(0).click();
         }

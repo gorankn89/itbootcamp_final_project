@@ -33,9 +33,6 @@ public class ProfileTest extends BaseTest {
     public void createNewUser() {
         driver.get("https://vue-demo.daniel-avellaneda.com/signup");
         singupPage.setDataInInputFields(fakerName, fakerEmail, fakerPassword, fakerPassword);
-        System.out.println(fakerEmail);
-        System.out.println(fakerPassword);
-
     }
 
     public void createAndLogin() {

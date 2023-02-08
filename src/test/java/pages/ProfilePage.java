@@ -52,10 +52,7 @@ public class ProfilePage extends BasePage {
     }
 
     public String getMessageDisplayedAfterSavingProfile() {
-        System.out.println("PORUKA NAKON SACUVANOG PROFILA");
-        System.out.println(saveMessageProfile.getText());
-        System.out.println(saveMessageProfile.getText().substring(0, saveMessageProfile.getText().indexOf("\n")));
-        return saveMessageProfile.getText().substring(0, saveMessageProfile.getText().indexOf("\n"));
+        return Util.extractFirstLine(saveMessageProfile.getText());
     }
 
     public void fillTheDataInInputFields(String name, String phone, String city, String country) {

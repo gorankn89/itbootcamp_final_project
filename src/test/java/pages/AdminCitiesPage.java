@@ -76,8 +76,6 @@ public class AdminCitiesPage extends BasePage {
     public boolean verifyEditedMessageSucces() {
         Util.wait(messageAfterSave, Condition.VISIBLE, driverWait);
         messageAfterSave.getText();
-        System.out.println(messageAfterSave.getAttribute("innerHTML"));
-        System.out.println(messageAfterSave.getAttribute("value"));
         return Util.extractFirstLine(messageAfterSave.getText()).equals("Saved successfully");
     }
 
