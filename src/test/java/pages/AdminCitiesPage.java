@@ -22,13 +22,13 @@ public class AdminCitiesPage extends BasePage {
     private WebElement saveStatus;
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr[1]/td[2]")
     private WebElement firstCityInTable;
-    @FindBy (xpath = "//*[@id=\"edit\"]/span")
+    @FindBy(xpath = "//*[@id=\"edit\"]/span")
     private WebElement editFirstCityBtn;
 
-    @FindBy (xpath = "//input[@name='name']")
+    @FindBy(xpath = "//input[@name='name']")
     private WebElement editFirstCityField;
 
-    @FindBy (css = ".btnSave")
+    @FindBy(css = ".btnSave")
     private WebElement btnSaveAfterEdit;
 
     @FindBy(css = ".v-snack--active")
@@ -42,27 +42,24 @@ public class AdminCitiesPage extends BasePage {
     private WebElement confirmDeleteBtn;
     @FindBy(xpath = "/html/body/div/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")
     private WebElement deleteSuccessMessage;
+
     public AdminCitiesPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
     }
 
-    public void goToCitiesPage(){
+    public void goToCitiesPage() {
         btnAdmin.click();
         btnCities.click();
     }
-    public void clickAddNewItemBtnAndAddACity(String city){
+
+    public void clickAddNewItemBtnAndAddACity(String city) {
         newItemBtn.click();
         inputCityField.sendKeys(city);
         saveBtn.click();
     }
-    public String getSaveStatus() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println();
 
+    public String getSaveStatus() {
+        Util.wait(saveStatus, Condition.VISIBLE,driverWait);
         return Util.extractFirstLine(saveStatus.getText());
 
     }
@@ -71,71 +68,34 @@ public class AdminCitiesPage extends BasePage {
     public String EditFirstCityName() {
         String editedCity = " - " + firstCityInTable.getText() + " edited";
         editFirstCityBtn.click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println("ISPIS Vrednosti");
-        System.out.println(editFirstCityField.getAttribute("value"));
         editFirstCityField.sendKeys(editedCity);
         btnSaveAfterEdit.click();
         return firstCityInTable.getText();
     }
 
     public boolean verifyEditedMessageSucces() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Util.wait(messageAfterSave, Condition.VISIBLE, driverWait);
         messageAfterSave.getText();
         System.out.println(messageAfterSave.getAttribute("innerHTML"));
         System.out.println(messageAfterSave.getAttribute("value"));
-        return Util. extractFirstLine(messageAfterSave.getText()).equals("Saved successfully");
+        return Util.extractFirstLine(messageAfterSave.getText()).equals("Saved successfully");
     }
 
     public boolean searchCity(String city) {
         searchFieldInput.sendKeys(city);
         city = city.toLowerCase();
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-        driverWait.until(ExpectedConditions.numberOfElementsToBe(By.xpath("//table/tbody/tr"), 1));
-        System.out.println("Ispis podataka pre dobijanja");
-        System.out.println(city);
-
-       if( firstCityInTable.getText().toLowerCase().contains(city)){
-           System.out.println("ISPIS STATUSA PRETRAGE");
-           System.out.println(firstCityInTable.getText());
-           return true;
-       }
-        System.out.println("ISPIS STATUSA PRETRAGE AKO PUKNE");
-        System.out.println(firstCityInTable.getText());
-       return false;
+        Util.wait("//table/tbody/tr", 1, driverWait);
+        return firstCityInTable.getText().toLowerCase().contains(city);
     }
 
     public void deleteFirstCity() {
         firstElementDeleteBtn.click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Util.wait(firstElementDeleteBtn, Condition.VISIBLE, driverWait);
         confirmDeleteBtn.click();
     }
 
     public boolean confirmDeleteMessage() {
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")));
-        System.out.println("Delete Message is");
-        System.out.println(deleteSuccessMessage.getText().substring(0, deleteSuccessMessage.getText().indexOf("\n")));
-       return Util.extractFirstLine(deleteSuccessMessage.getText()).equals("Deleted successfully");
+        Util.wait(deleteSuccessMessage, Condition.VISIBLE, driverWait);
+        return Util.extractFirstLine(deleteSuccessMessage.getText()).equals("Deleted successfully");
     }
 }

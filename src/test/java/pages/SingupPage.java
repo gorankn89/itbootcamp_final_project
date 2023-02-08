@@ -35,10 +35,8 @@ public class SingupPage extends BasePage {
 
     // Methods of SingUp Page
     public boolean checkInputTypes() {
-        if (emailInput.getAttribute("type").equals("email") && passwordInput.getAttribute("type").equals("password") && confirmPasswordInput.getAttribute("type").equals("password")) {
-            return true;
-        }
-        return false;
+        return emailInput.getAttribute("type").equals("email") && passwordInput.getAttribute("type").equals("password") && confirmPasswordInput.getAttribute("type").equals("password");
+
     }
 
     public void setDataInInputFields(String name, String email, String password, String confirmPassword) {

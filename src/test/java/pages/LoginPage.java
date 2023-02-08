@@ -57,13 +57,8 @@ public class LoginPage extends BasePage {
 
     public void logOutIfNecesary() {
         if (!logOutButtonList.isEmpty()) {
-            System.out.println("LISTA IMA ELEMENATA");
-
-            System.out.println(logOutButtonList.size());
             logOutButtonList.get(0).click();
         }
-        System.out.println("Not Logged In");
-
     }
 
     public boolean checkErrorWhenUserDoesNotExists(String message) {

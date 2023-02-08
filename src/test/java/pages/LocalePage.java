@@ -28,8 +28,6 @@ public class LocalePage extends BasePage {
     public String setLocale(int elementIndex) {
         localeLanguageBtn.click();
         localeSelectionList.get(elementIndex).click();
-        System.out.println("HEADER TEXT JE ");
-        System.out.println(header.getText());
         return header.getText();
     }
 
