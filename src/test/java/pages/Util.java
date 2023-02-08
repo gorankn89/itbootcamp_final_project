@@ -27,4 +27,5 @@ public abstract class Util {
     public static void wait (String xpath, int numberOfElements, WebDriverWait driverWait){
         driverWait.until(ExpectedConditions.numberOfElementsToBe(By.xpath(xpath), numberOfElements));
     }
+
 }

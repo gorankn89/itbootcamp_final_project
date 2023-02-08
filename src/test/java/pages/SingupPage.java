@@ -28,6 +28,12 @@ public class SingupPage extends BasePage {
     @FindBy(xpath = "//div[@class='v-card__title headline grey lighten-2 black--text dlgVerifyAccount']")
     private WebElement singupPopupMessage;
 
+    @FindBy(css = "#app > div.v-dialog__content.v-dialog__content--active > div > div > div.v-card__actions > button")
+    private WebElement closeButtonAfterLogin;
+
+    public WebElement getCloseButtonAfterLogin() {
+        return closeButtonAfterLogin;
+    }
 
     public SingupPage(WebDriver driver, WebDriverWait driverWait) {
         super(driver, driverWait);
@@ -36,7 +42,6 @@ public class SingupPage extends BasePage {
     // Methods of SingUp Page
     public boolean checkInputTypes() {
         return emailInput.getAttribute("type").equals("email") && passwordInput.getAttribute("type").equals("password") && confirmPasswordInput.getAttribute("type").equals("password");
-
     }
 
     public void setDataInInputFields(String name, String email, String password, String confirmPassword) {
@@ -47,17 +52,21 @@ public class SingupPage extends BasePage {
         signupButton.click();
     }
 
-    public String checkErrorUsserExists() {
-        System.out.println(errorMessageText.getText());
+    public String checkErrorUserExists() {
+        Util.wait(errorMessageText, Condition.VISIBLE, driverWait);
         return errorMessageText.getText();
     }
 
-    public String getSingupMessageText() {
-        System.out.println(singupPopupMessage.getText());
+    public String getSignupMessageText() {
+        Util.wait(singupPopupMessage, Condition.VISIBLE, driverWait);
         return singupPopupMessage.getText();
     }
 
     public WebElement getSignupButton() {
         return signupButton;
+    }
+
+    public void goToSignupPage() {
+        driver.get("https://vue-demo.daniel-avellaneda.com/signup");
     }
 }

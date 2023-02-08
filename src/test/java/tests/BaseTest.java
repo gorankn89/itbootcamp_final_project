@@ -55,7 +55,7 @@ public abstract class BaseTest {
     @BeforeMethod
     public void beforeMethod() {
         driver.get("https://vue-demo.daniel-avellaneda.com");
-        loginPage.logOutIfNecesary();
+        loginPage.logOutIfNecessary();
 
     }
 

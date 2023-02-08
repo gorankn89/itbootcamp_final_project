@@ -1,10 +1,10 @@
 package tests;
 
-import com.sun.xml.internal.ws.policy.AssertionSet;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.SingupPage;
+import pages.Condition;
+import pages.Util;
 
 public class SingupTest extends BaseTest {
     // Local Variables for testing
@@ -15,14 +15,15 @@ public class SingupTest extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        driver.get("https://vue-demo.daniel-avellaneda.com/signup");
-        loginPage.logOutIfNecesary();
+        singupPage.goToSignupPage();
     }
 
     //Test #1: Visits the signup page
     @Test
-    public void VerifyUrlSingupPage() {
-        Assert.assertTrue(singupPage.urlCompare("/signup", true));
+    public void verifyUrlSignupPage() {
+
+        singupPage.goToSignupPage();
+        Assert.assertTrue(singupPage.urlCompare("/signup", false));
     }
 
     //Test #2: Checks input types
@@ -33,9 +34,9 @@ public class SingupTest extends BaseTest {
 
     //Test #3: Displays errors when user already exists
     @Test
-    public void checkIfErrorDisplayedForExistingUsser() {
+    public void checkIfErrorDisplayedForExistingUser() {
         singupPage.setDataInInputFields(name, email, password, confirmPassword);
-        Assert.assertEquals(singupPage.checkErrorUsserExists(), "E-mail already exists");
+        Assert.assertEquals(singupPage.checkErrorUserExists(), "E-mail already exists");
         Assert.assertTrue(singupPage.urlCompare("/signup", true));
     }
 
@@ -43,11 +44,15 @@ public class SingupTest extends BaseTest {
     @Test
     public void signUpNewUser() {
         String name = "Goran Knezevic";
-        String email = "mail4@mail.com";
+        String email = fakerEmail;
         String password = "najjacaSifra";
         String confirmPassword = "najjacaSifra";
         singupPage.setDataInInputFields(name, email, password, confirmPassword);
-        Assert.assertEquals(singupPage.getSingupMessageText(), "IMPORTANT: Verify your account");
+        Assert.assertEquals(singupPage.getSignupMessageText(), "IMPORTANT: Verify your account");
+        Util.wait(singupPage.getCloseButtonAfterLogin(), Condition.CLICKABLE, driverWait);
+        singupPage.getCloseButtonAfterLogin().click();
+        loginPage.logOutIfNecessary();
+
     }
 
 }

@@ -18,7 +18,14 @@ public abstract class BasePage {
     }
 
     public boolean urlCompare(String what, boolean end) {
-        driverWait.until(ExpectedConditions.urlContains(what));
+//        driverWait.until(ExpectedConditions.urlContains(what));
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("CURRENT URL IS");
+        System.out.println(driver.getCurrentUrl());
         if (end) {
             return driver.getCurrentUrl().endsWith(what);
         }

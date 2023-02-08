@@ -54,7 +54,7 @@ public class LoginTest extends BaseTest {
     public void logMeOut() {
         loginPage.logMeIn(realUser, realPassword);
         Assert.assertTrue(loginPage.verifyLogOutButton());
-        loginPage.logOutIfNecesary();
+        loginPage.logOutIfNecessary();
         Assert.assertTrue(loginPage.isOnLoginPage());
         driver.get("https://vue-demo.daniel-avellaneda.com/home");
         Assert.assertTrue(loginPage.isOnLoginPage());
