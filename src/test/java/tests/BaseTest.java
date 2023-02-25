@@ -40,8 +40,8 @@ public abstract class BaseTest {
     public void beforeClass() {
         System.setProperty("webdriver.chrome.driver", "F:\\chromedriver.exe");
         this.driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        this.driverWait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        this.driverWait = new WebDriverWait(driver, Duration.ofSeconds(5));
         driver.manage().window().maximize();
         this.loginPage = new LoginPage(driver, driverWait);
         this.singupPage = new SingupPage(driver, driverWait);
